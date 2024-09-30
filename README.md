@@ -13,8 +13,8 @@ apple desktop systems.
 -if you want to switch between writing and coding, you can copy the code in the
 "write.vim" file to your own vimrc, or you put write.vim in your .vim/plugin folder.
 That will give you the commands ":Write" and ":Code". A sessions document will
-keep track of your preferred settings, and using the commands "Write" and 
-"Code" commands will switch them.
+keep track of your preferred settings, and using the commands ":Write" and 
+":Code" commands will switch them.
 
 -This makes navigating the virtual lines and "real" lines the same:
 
