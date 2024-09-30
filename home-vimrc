@@ -1,0 +1,329 @@
+"shortcut to create a normal mode remap
+au FileType vim iabbrev <buffer> nn nnoremap
+
+set nowrap
+
+"makes going back a tab just a little simpler and
+"more intuitive
+nnoremap gb gT
+
+"shows full path no matter where you are
+"the backslashes escape the space. Also,
+"shows full linke numbers of document
+set statusline=%F\ \ \ \ Lines:\ %L\ \ \ \ Col:\ %c
+
+"an easy mistake to make
+nnoremap J <nop>
+
+"allows you to use plugins with
+"filetype, also automatically comments
+"the next line with enter
+filetype on
+filetype plugin on
+
+"changes leader key to spacebar
+let mapleader = " "
+
+"minimizes button pressing for "quit without saving"
+nnoremap Q :q!<cr>         
+
+"fixes bug with backspace in konsole
+set backspace=indent,eol,start
+
+"backspaces tab amounts
+inoremap <c-left> <left><left><left><left>
+                 
+"takes cursor to beginning text of line instead
+"of true line beginning
+nnoremap <leader>0 I<esc>l
+
+"move between panes
+"this works for both horizontal and
+"vertical splits, without interfering
+"with you ability to use arrow keys
+nnoremap <c-left> <c-w>h
+nnoremap <c-right> <c-w>l
+nnoremap <c-up> <c-w>k
+nnoremap <c-down> <c-w>j
+tnoremap <c-left> <c-w>h
+tnoremap <c-right> <c-w>l
+tnoremap <c-up> <c-w>k
+tnoremap <c-down> <c-w>j
+
+"turns syntax highlighting on
+"it's not always on by default
+syntax on
+
+"erases a line in place without changing to insert mode
+" nnoremap <leader>c cc<esc>
+
+"erases lines of text and leaves a blank one in place
+vnoremap <leader>c c<esc>
+
+"this makes it so you can quickly pull
+"up these files in splitscreen
+:nnoremap <leader>e :tabnew $MYVIMRC<cr>
+:nnoremap <leader>h :tabnew /home/sisyphus/vim-help<cr>
+
+"this is for storing vimscript code you no longer use
+:nnoremap <leader>g :tabnew /home/sisyphus/.vim_graveyard<cr>
+
+"pulls up the help page for C programming
+command! Chelp tabnew ~/CodingBooks/c-help
+"sets time to match pairs at 1 millesecond by default
+set matchtime=1
+
+"makes it so esc saves file whenever pressed
+nnoremap <Esc> <Esc>:w<Enter>
+inoremap <Esc> <Esc>:w<Enter>
+xnoremap <Esc> <Esc>:w<Enter>
+vnoremap <Esc> <Esc>:w<Enter>
+cnoremap <Esc> <Esc>:w<Enter>
+
+"gives docs in vim line numbers by default
+set number
+    
+"a shortcut for the :tabnew command
+"all defined commands and functions need to be
+"uppercase, :execute is needed for commands
+"that take arguments, and <q-args> means that
+"anything after your command is interpreted as
+"an argument, "quote args", meaning even spaces
+"are part of the argument. 
+command! -nargs=1 T :execute 'tabnew' <q-args>
+
+"makes deleting a word backward in insert mode
+"more convenient
+inoremap <C-Z> <C-W>
+
+"remaps c-z in normal mode to 
+"enter the black hole register
+nnoremap <c-z> "_
+xnoremap <c-z> "_
+vnoremap <c-z> "_
+
+"enter insert mode and jump forward a tab
+nnoremap <C-T> i<Tab>
+                                 
+"break text apart as you would do with the enter key
+"in normal mode
+nnoremap <C-E> i<Enter><Esc>
+
+"turns on highlighted search items
+set hls
+
+"turns off annoying swap file feature
+set noswapfile
+
+"turns on auto indent
+"set autoindent does same thing
+set ai
+
+"lines below cause sursor to jump to last position when
+"re-opening a file, this is also located in /etc/vim/vimrc
+"but this version looks a lot neater.
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+"************************************************
+"tabs are now seen as spaces
+" set expandtab
+
+"sets tabs to four spaces
+set tabstop=4
+ 
+"sets indention for the >>,>,<<,< methods of indentation
+"shiftwidth is a different setting than tabstop, you need
+"to set shiftwidth and tab stop for indentation to work
+set shiftwidth=4
+
+set softtabstop=4
+"*************************************************                                      
+"
+"laststatus shows a status bar above the bottom
+"so you can see filename in command mode
+"by setting 2 as value for laststatus
+set laststatus=2
+
+colorscheme horror
+" colorscheme 256-jungle
+" colorscheme murphy
+"if you want to see the colorschemes, :colorscheme[space][ctrl+d]
+"code for for themes are in /usr/local/share/vim/vim90/colors
+ 
+"turns off parenthesis highlighting because it gets in the way
+"of seeing the cursor 
+let g:loaded_matchparen=1
+
+"easy toggle for highlight search
+nnoremap H :set hls!<CR>H
+
+"saves all files and quits
+nnoremap <C-x> :xa<Enter>
+inoremap <C-x> <C-o>:xa<CR>
+
+ " nnoremap <F1> :xa<Enter>
+ " inoremap <F1> <C-o>:xa<CR>
+"open the help doc in a new tab, instead of horizontal pane
+nnoremap <F4> :tab help<CR>
+
+"source current file: corrects problems when
+"testing vimscript code like in this file
+" nnoremap <F5> <esc>:source %<cr>
+
+"this is the schematic for enabling commenting
+"for more filetypes with tim pope's commentary
+"plugin, but it doesn't work
+"autocmd FileType bash setlocal commentstring=#\ %s
+
+"This enables persistent undo, remembers changes from previous 
+"opens and saves, the undodir directory in .vim must be created
+"first for this to work
+set undofile
+set undodir=~/.vim/undodir
+
+"enables text folding, then the augroup
+"below means vim remembers what you folded
+set foldenable
+
+"augroup so vim remembers what you folded
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave * mkview
+"   autocmd BufWinEnter * silent! loadview
+" augroup END
+
+"alternate tab change, allows for it in insert mode too
+nnoremap <PageUp> gt
+nnoremap <PageDown> gT
+inoremap <PageUp> <esc>gt
+inoremap <PageDown> <esc>gT
+
+"drops a full line and jumps a tab forward
+nnoremap <leader>t o<tab>
+   
+"function and command to print shebang and enter insert mode
+function! B()
+    normal! i#!/bin/bash
+    stopinsert
+    normal! o
+    startinsert
+    write
+    !chmod +x %
+endfunction
+
+command! B call B()
+"template for main function in C
+function! C()
+    normal! i#include<stdio.h>
+    normal! o
+    normal! i#include<stdlib.h>
+    normal! o
+    normal! o
+    normal! iint main()
+    normal! o
+    normal! i{
+    normal! o
+    normal! o
+    normal! i}
+    normal! k
+endfunction    
+
+command! C call C()
+"inserts appropriate tabs spaces and brackets below text
+"for C expressions, python dictionaries, bash functions etc.
+function! Br()
+    "this version worked until it didn't
+    " let spaces = matchstr(getline('.'), '^ *')
+    let spaces = matchstr(getline('.'), '^\s*')
+    let right_bracket = spaces . '}'
+    call append('.', right_bracket)
+    let left_bracket = spaces . '{'
+    call append('.', left_bracket)
+    "leaving vim in normal mode allows for more
+    "flexibility
+    " startinsert
+endfunction    
+      
+command! Br call Br()
+   
+"create a C-style function
+function! F()
+    normal! i()
+    normal! o
+    normal! i{
+    normal! o
+    normal! i}
+    normal! kk
+endfunction    
+
+command! F call F()
+
+"abbreviations for printf and scanf in c
+au FileType c iabbrev <buffer> prif printf("");<esc>hhh
+au FileType c iabbrev <buffer> scf scanf("");<esc>hhh
+
+"keeps files from having their own settings
+" set nomodeline
+" for help:
+" https://vim.fandom.com/wiki/Modeline_magic
+set modeline
+
+"copy whole document to buffer
+"nnoremap <F2> gg"0yG
+nnoremap <c-y> gg"+yG
+"
+
+"copy visual selection to mouse clipboard
+"(see augroup below)
+" vnoremap <F3> "+0
+
+"copy from default clipboard to system/mouse clipboard
+"and vice versa everytime something is copied to a register
+" if has("gui_running")
+	" autocmd TextYankPost * let @+ = @0 | let @0 = @+ 
+	"autocmd TextYankPost * let @+ = @0 | let @0 = @+
+" endif	
+autocmd TextYankPost * if v:event.regname == '*' | let @+ = @0 | let @0 = @+ | endif
+  
+
+"makes navigating virtual and real lines the same
+"there's no logical reason to have them as different mappings
+nnoremap j gj
+nnoremap k gk
+
+"functions for coding and writing modes
+function! Code()
+    set nowrap
+    set textwidth=0
+	set nolinebreak
+    set number
+    set ai
+	set nospell
+	set statusline=%F\ \ \ \ Lines:\ %L\ \ \ \ Col:\ %c
+	mksession! %-settings.vim
+endfunction
+
+function! Write()
+    startinsert
+    set wrap
+    set textwidth=80
+	set linebreak
+    set nonumber
+    set noai
+	set statusline=%F\ \ \ \ Words:\ %{wordcount().words}\ \ \ \ Col:\ %c
+	set spell
+	mksession! %-settings.vim
+endfunction
+
+"map above functions to commands
+command! Write call Write()
+command! Code call Code()
+
+"automatically source session file if it exists
+autocmd BufReadPost *
+\ if filereadable(expand('%:p:h') . '/' . expand('%:t') . '-settings.vim') |
+\	source %:p:h/%:t-settings.vim |
+\ endif
