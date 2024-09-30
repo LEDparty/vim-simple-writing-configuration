@@ -3,7 +3,8 @@
 This is a simple alternative to the more complex vim configurations for
 writers: vim was created for the purpose of writing computer programs, which is
 very different from writing documents. Rather than provide install
-instructions separately, the tiny amount of code completely explained. This repository can be used in the fallowing ways:
+instructions separately, the tiny amount of code completely explained.
+This repository can be used in the fallowing ways:
 
 -if you want to use vim mainly (or only) for writing documents, then you can
 just copy the .vimrc file to your home directly. This should work for linux and
