@@ -18,39 +18,31 @@ keep track of your preferred settings, and using the commands ":Write" and
 
 -This makes navigating the virtual lines and "real" lines the same:
 
-<code><pre>   
 nnoremap j gj
 nnoremap k gk
-</code></pre>
 
 -writers normally start typing off the bat, so this ensures vim will start in
 insert mode. With coding, you are probably spending more time editing a text
 file instead of typing more characters into it, which is why it starts in normal
 mode by default:
 
-<code><pre>
 startinsert
-</code></pre>
 
 -for whatever reason, vim by default does not remember where your cursor was the
 last time you were editing the document, which in my opinion, a universally
 helpful setting. This vim code changes this behavior:
 
-<code><pre>
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-<code></pre>
 
 -writing software needs to let the user continue typing regardless of the
 number of words that fit in a line, and it needs to automatically put words that exceed the line length on the next line:
 
-<code><pre>
 set wrap
 set textwidth=80
 set linebreak
-<code></pre>
 
 This is one of the key features that separates word processors from text 
 editors: but now we can combine that with the powers of vim.
@@ -59,9 +51,7 @@ editors: but now we can combine that with the powers of vim.
 etc.), let's create a mapping that copies the entire document to the mouse
 clipboard:
 
-<code><pre>
 nnoremap <c-y> gg"+yG
-</code></pre>
 
 You can now press ctrl + y to copy and paste an entire document to any window
 you please.
@@ -70,15 +60,11 @@ you please.
 Vim also offers ways of moving between mispelled words, and can give you a list
 of alternate spellings:
 
-<code><pre>
 set spell
-</code></pre>
 
 -and finally, since writers tend to think of their work in terms of numbers of
 words (instead of numbers of lines, as with programmers/coders), let's put the
 word count at the bottom of the page:
 
-<code><pre>
 set statusline=%F\ \ \ \ Words:\ %{wordcount().words}\ \ \ \ Col:\ %c
-</code></pre>
 
