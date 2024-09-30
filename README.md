@@ -46,11 +46,11 @@ autocmd BufReadPost *
 -writing software needs to let the user continue typing regardless of the
 number of words that fit in a line, and it needs to automatically put words that exceed the line length on the next line:
 
-<pre><code>
+<code><pre>
 set wrap
 set textwidth=80
 set linebreak
-</pre></code>
+<code></pre>
 
 This is one of the key features that separates word processors from text 
 editors: but now we can combine that with the powers of vim.
@@ -59,9 +59,9 @@ editors: but now we can combine that with the powers of vim.
 etc.), let's create a mapping that copies the entire document to the mouse
 clipboard:
 
-<pre><code>
+<code><pre>
 nnoremap <c-y> gg"+yG
-</pre></code>
+</code></pre>
 
 You can now press ctrl + y to copy and paste an entire document to any window
 you please.
@@ -70,12 +70,15 @@ you please.
 Vim also offers ways of moving between mispelled words, and can give you a list
 of alternate spellings:
 
+<code><pre>
 set spell
+</code></pre>
 
 -and finally, since writers tend to think of their work in terms of numbers of
 words (instead of numbers of lines, as with programmers/coders), let's put the
 word count at the bottom of the page:
 
-<pre><code>
+<code><pre>
 set statusline=%F\ \ \ \ Words:\ %{wordcount().words}\ \ \ \ Col:\ %c
-</pre></code>
+</code></pre>
+
